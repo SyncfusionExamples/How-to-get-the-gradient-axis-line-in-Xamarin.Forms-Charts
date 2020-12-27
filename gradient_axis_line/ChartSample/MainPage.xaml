@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:syncfusion="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             mc:Ignorable="d" xmlns:local="clr-namespace:ChartSample;assembly=ChartSample"
+             x:Class="ChartSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <syncfusion:ChartColorCollection x:Key="Colors">
+                <Color>#47eded</Color>
+                <Color>#2f8cd4</Color>
+                <Color>#4235a6</Color>
+                <Color>#9414de</Color>
+                <Color>#da0bde</Color>
+            </syncfusion:ChartColorCollection>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <syncfusion:SfChart VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand">
+            <syncfusion:SfChart.Title>
+                <syncfusion:ChartTitle Text="Sales of Products" FontSize="22" FontAttributes="Bold"/>
+            </syncfusion:SfChart.Title>
+            <syncfusion:SfChart.PrimaryAxis>
+                <syncfusion:NumericalAxis x:Name="primaryAxis" Minimum="2009" Interval="1"  >
+                    <syncfusion:NumericalAxis.Title>
+                        <syncfusion:ChartAxisTitle Text="Year"></syncfusion:ChartAxisTitle>
+                    </syncfusion:NumericalAxis.Title>
+                    <syncfusion:NumericalAxis.AxisLineStyle>
+                        <syncfusion:ChartLineStyle StrokeWidth="0"  StrokeColor="RosyBrown" />
+                    </syncfusion:NumericalAxis.AxisLineStyle>
+                    <syncfusion:NumericalAxis.MajorTickStyle >
+                        <syncfusion:ChartAxisTickStyle TickSize="0" />
+                    </syncfusion:NumericalAxis.MajorTickStyle>
+                    <syncfusion:NumericalAxis.StripLines>
+                        <syncfusion:NumericalStripLine FillColor="#f70a1d" 
+                                                      Width="0.2" 
+                                                      IsSegmented="True"
+                                                      SegmentStart="0" 
+                                                      SegmentEnd="200" 
+                                                      SegmentAxisName="secondaryAxis"
+                                                      Start="{Binding Minimum, Source={x:Reference primaryAxis}}"/>
+
+                        <syncfusion:NumericalStripLine FillColor="#f0e351" 
+                                                      Width="0.2" 
+                                                      IsSegmented="True"
+                                                      SegmentStart="200" 
+                                                      SegmentEnd="400" 
+                                                      SegmentAxisName="secondaryAxis"
+                                                      Start="{Binding Minimum, Source={x:Reference primaryAxis}}"/>
+
+                        <syncfusion:NumericalStripLine FillColor="#3ae84b" 
+                                                      Width="0.2" 
+                                                      IsSegmented="True"
+                                                      SegmentStart="400" 
+                                                      SegmentEnd="600" 
+                                                      SegmentAxisName="secondaryAxis"
+                                                      Start="{Binding Minimum, Source={x:Reference primaryAxis}}"/>
+                    </syncfusion:NumericalAxis.StripLines>
+                </syncfusion:NumericalAxis>
+            </syncfusion:SfChart.PrimaryAxis>
+
+            <syncfusion:SfChart.SecondaryAxis>
+                <syncfusion:NumericalAxis x:Name="secondaryAxis" Minimum="0" Interval="200" Maximum="600" >
+                    <syncfusion:NumericalAxis.Title>
+                        <syncfusion:ChartAxisTitle Text="Product"></syncfusion:ChartAxisTitle>
+                    </syncfusion:NumericalAxis.Title>
+                    <syncfusion:NumericalAxis.AxisLineStyle>
+                        <syncfusion:ChartLineStyle StrokeWidth="0"  />
+                    </syncfusion:NumericalAxis.AxisLineStyle>
+                    <syncfusion:NumericalAxis.MajorTickStyle >
+                        <syncfusion:ChartAxisTickStyle TickSize="0" />
+                    </syncfusion:NumericalAxis.MajorTickStyle>
+                </syncfusion:NumericalAxis>
+            </syncfusion:SfChart.SecondaryAxis>
+
+            <syncfusion:SfChart.Series>
+                <syncfusion:ColumnSeries x:Name="lineSeries" ItemsSource="{Binding Data}" XBindingPath="Year" YBindingPath="Product" >
+                    <syncfusion:ColumnSeries.ColorModel>
+                        <syncfusion:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
+                    </syncfusion:ColumnSeries.ColorModel>
+                </syncfusion:ColumnSeries>
+            </syncfusion:SfChart.Series>
+        </syncfusion:SfChart>
+    </StackLayout>
+
+</ContentPage>
