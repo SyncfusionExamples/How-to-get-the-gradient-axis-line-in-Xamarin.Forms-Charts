@@ -1,7 +1,7 @@
 # How-to-get-the-gradient-axis-line-in-Xamarin.Forms-Charts
 This article explains how to get the gradient color axis line in Xamarin.Forms Charts as shown in below
 
- ![](output.png)
+ ![](output.jpg)
 
 In order to define the axis range with various color combination as updated in above then it has been achieved by using any of the following ways.
 # Using StripLines
